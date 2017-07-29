@@ -7,7 +7,7 @@ module.exports = {
         if(err) {
           throw err;
         } else {
-          console.log(result);
+          // console.log(result);
           callback(result);
         }
       });
