@@ -4,7 +4,7 @@ var app = {
   //TODO: The current 'handleUsernameClick' function just toggles the class 'friend'
   //to all messages sent by the user
   server: 'http://127.0.0.1:3000/classes/messages',
-  username: 'root',
+  username: 'anonymous',
   roomname: 'lobby',
   lastMessageId: 0,
   friends: {},
@@ -26,7 +26,7 @@ var app = {
     app.$roomSelect.on('change', app.handleRoomChange);
 
     // Fetch previous messages
-    app.startSpinner();
+    // app.startSpinner();
     app.fetch(false);
 
     // Poll for new messages
@@ -36,11 +36,11 @@ var app = {
   },
 
   send: function(message) {
-    app.startSpinner();
+    // app.startSpinner();
 
     // POST the message to the server
     $.ajax({
-      url: app.server,
+      url: 'http://127.0.0.1:3000/classes/messages',
       type: 'POST',
       data: message,
       success: function (data) {
@@ -58,7 +58,7 @@ var app = {
 
   fetch: function(animate) {
     $.ajax({
-      url: app.server,
+      url: 'http://127.0.0.1:3000/classes/messages',
       type: 'GET',
       data: { order: '-createdAt' },
       contentType: 'application/json',
@@ -97,7 +97,7 @@ var app = {
   renderMessages: function(messages, animate) {
     // Clear existing messages`
     app.clearMessages();
-    app.stopSpinner();
+    // app.stopSpinner();
     if (Array.isArray(messages)) {
       // Add all fetched messages that are in our current room
       messages
@@ -203,7 +203,7 @@ var app = {
         app.$roomSelect.val(roomname);
       }
     } else {
-      app.startSpinner();
+      // app.startSpinner();
       // Store as undefined for empty names
       app.roomname = app.$roomSelect.val();
     }
@@ -224,13 +224,13 @@ var app = {
     event.preventDefault();
   },
 
-  startSpinner: function() {
-    $('.spinner img').show();
-    $('form input[type=submit]').attr('disabled', 'true');
-  },
+//   startSpinner: function() {
+//     $('.spinner img').show();
+//     $('form input[type=submit]').attr('disabled', 'true');
+//   },
 
-  stopSpinner: function() {
-    $('.spinner img').fadeOut('fast');
-    $('form input[type=submit]').attr('disabled', null);
-  }
-};
+//   stopSpinner: function() {
+//     $('.spinner img').fadeOut('fast');
+//     $('form input[type=submit]').attr('disabled', null);
+//   }
+// };

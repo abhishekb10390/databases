@@ -22,7 +22,7 @@
 
 app = {
 
-  server: 'https://api.parse.com/1/classes/messages/',
+  server: 'localhost',
 
   init: function() {
     // Get username
